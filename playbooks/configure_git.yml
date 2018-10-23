@@ -1,0 +1,16 @@
+---
+- name: "Prepare a working git environment"
+  hosts: all
+  tasks:
+    - name: "Ensure git is installed"
+      become: true
+      dnf:
+        name: git
+        state: present
+
+    - name: "Configure git with appropriate information"
+      git_config:
+        name: "{{ item.key }}"
+        scope: global
+        value: "{{ item.value }}"
+      with_dict: "{{ git_configuration }}"
