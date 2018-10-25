@@ -3,4 +3,5 @@ git_configuration:
   'user.name': "{{ vault_git_user_name }}"
   'user.email': "{{ vault_git_user_email }}"
   'user.signingkey': "{{ vault_git_user_signingkey }}"
+  'gpg.program': gpg2
   'commit.gpgsign': true
