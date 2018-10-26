@@ -1,0 +1,22 @@
+---
+- name: "Configure and customize terminal to match my expectations"
+  hosts: all
+  tasks:
+    - name: "Ensure oh-my-zsh pre-requirements are installed"
+      become: true
+      dnf:
+        name:
+          - curl
+          - git
+          - zsh
+          - libselinux-python
+        state: present
+
+    - name: Download oh-my-zsh installation script
+      get_url:
+        url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+        dest: /tmp/install-oh-my-zsh.sh
+        mode: "u+rwx"
+
+    - name: "Run oh-my-zsh installation"
+      script: /tmp/install-oh-my-zsh.sh
