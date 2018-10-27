@@ -8,6 +8,12 @@
         name: git
         state: present
 
+    - name: "Ensure gitk is installed"
+      become: true
+      dnf:
+        name: gitk
+        state: present
+
     - name: "Configure git with appropriate information"
       git_config:
         name: "{{ item.key }}"

@@ -1,4 +1,11 @@
 ---
+user_configration:
+  uid: 1000
+  name: "{{ vault_os_user_name }}"
+  comment: "{{ vault_os_user_comment }}"
+  group_name: "{{ vault_os_user_name }}"
+  group_id: 1000
+
 git_configuration:
   'user.name': "{{ vault_git_user_name }}"
   'user.email': "{{ vault_git_user_email }}"

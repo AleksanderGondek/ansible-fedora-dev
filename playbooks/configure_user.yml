@@ -1,0 +1,27 @@
+---
+- name: "Prepare and configure desired system user"
+  hosts: all
+  tasks:
+    - name: "Ensure group '{{ user_configration.group_name }}' exists"
+      become: true
+      group:
+        gid: "{{ user_configration.group_id }}"
+        name: "{{ user_configration.group_name }}"
+        state: present
+
+    - name: "Ensure user '{{ user_configration.name }}' exists"
+      become: true
+      user:
+        name: "{{ user_configration.name }}"
+        comment:  "{{ user_configration.comment }}"
+        uid: 1000
+        state: present
+        group: "{{ user_configration.group_name }}"
+        groups:
+          - "{{ user_configration.group_name }}"
+          - "wheel"
+        shell: /usr/bin/zsh
+        append: true
+        generate_ssh_key: true
+        ssh_key_bits: 4096
+        ssh_key_file: ".ssh/id_rsa"
