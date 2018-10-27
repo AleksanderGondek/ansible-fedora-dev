@@ -14,3 +14,17 @@ git_configuration:
   'user.signingkey': "{{ vault_git_user_signingkey }}"
   'gpg.program': gpg2
   'commit.gpgsign': true
+
+oh_my_zsh_configuration:
+  theme: "agnoster"
+  plugins:
+    - bundler
+    - dirhistory
+    - dnf
+    - docker
+    - gem
+    - git
+    - pip
+    - tmux
+    - vagrant
+    - yarn
