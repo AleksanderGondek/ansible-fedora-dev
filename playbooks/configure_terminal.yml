@@ -10,6 +10,7 @@
           - git
           - zsh
           - libselinux-python
+          - powerline-fonts
         state: present
 
     - name: Download oh-my-zsh installation script
