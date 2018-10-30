@@ -1,0 +1,31 @@
+---
+- name: "Configure and customize terminal to match my expectations"
+  hosts: all
+  tasks:
+    - name: "Ensure tmux et. al. pre-requirements are installed"
+      become: true
+      dnf:
+        name:
+          - python3-pip
+          - tmux
+        state: present
+
+    - name: "Ensure powerline-status is installed"
+      pip:
+        name: powerline-status
+        executable: pip3
+        extra_args: --user
+        state: present
+
+    - name: "Get information about powerline installation"
+      command: "pip3 show powerline-status"
+      register: powerline_pip_info
+
+    - name: "Retrieve powerline installation dir and bin location"
+      set_fact:
+        powerline_dir: "{{ powerline_pip_info.stdout_lines[7].split(':')[1] }}/powerline"
+
+    - name: "Create tmux configuration file"
+      template:
+        src: "{{ playbook_dir }}/templates/.tmux.conf.j2"
+        dest: ~/.tmux.conf

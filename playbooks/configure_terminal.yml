@@ -34,24 +34,34 @@
         regexp: 'plugins=\(\n  git\n\)'
         replace: "plugins=(\n {{ oh_my_zsh_configuration.plugins | join('\n ') }} \n)"
 
-    - name: "Ensure tmux et. al. pre-requirements are installed"
-      become: true
-      dnf:
-        name:
-          - python3-pip
-          - tmux
-        state: present
+    - name: "Auto start tmux while logging in"
+      lineinfile:
+        path: "~/.zshrc"
+        line: "ZSH_TMUX_AUTOSTART=true"
+        insertbefore: BOF
 
-    - name: "Ensure powerline-status is installed"
-      pip:
-        name: powerline-status
-        executable: pip3
-        state: present
+    - name: "Get information about pip3 user site install location"
+      command: "python3 -m site --user-base"
+      register: pip3_user_bin_info
 
-    - name: "Get information about powerline installation"
-      command: "pip3 show powerline-status"
-      register: powerline_pip_info
+    - name: "Ensure .profile file exists"
+      file:
+        path: ~/.profile
+        state: touch
 
-    - name: "Retrieve powerline installation dir"
-      set_fact:
-        powerline_dir: "{{ powerline_pip_info.stdout_lines[7].split(':')[1] }}/powerline"
+    - name: "Ensure pip3 --user bin location is added to $PATH for .profile"
+      lineinfile:
+        path: "~/.profile"
+        regexp: "^export PATH="
+        line: "export PATH=\"$PATH:{{ pip3_user_bin_info.stdout }}/bin\""
+
+    - name: "Ensure .zprofile file exists"
+      file:
+        path: ~/.zprofile
+        state: touch
+
+    - name: "Ensure pip3 --user bin location is added to $PATH for .zprofile"
+      lineinfile:
+        path: "~/.zprofile"
+        regexp: "^export PATH="
+        line: "export PATH=\"$PATH:{{ pip3_user_bin_info.stdout }}/bin\""
