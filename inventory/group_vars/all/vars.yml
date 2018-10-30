@@ -1,5 +1,6 @@
 ---
 ansible_user: "{{ vault_os_user_name }}"
+ansible_python_interpreter: /usr/bin/python3
 
 user_configration:
   uid: 1000
