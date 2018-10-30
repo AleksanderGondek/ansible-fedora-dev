@@ -1,2 +1,8 @@
 ---
-- import_playbook: 'playbooks/configure_git'
+- import_playbook: 'playbooks/configure_git.yml'
+
+- import_playbook: 'playbooks/configure_terminal.yml'
+
+- import_playbook: 'playbooks/configure_user.yml'
+
+- import_playbook: 'playbooks/configure_tmux.yml'
