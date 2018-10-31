@@ -1,1 +1,59 @@
 ---
+- name: "Remove old versions of docker"
+  dnf:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-selinux
+      - docker-engine-selinux
+      - docker-engine
+    state: absent
+
+- name: "Remove previous docker-ce installation"
+  dnf:
+    name: docker-ce
+    state: absent
+  when: ansible_fedora_docker_purge
+
+- name: "Remove default docker data root"
+  file:
+    path: "/var/lib/docker/"
+    state: absent
+  when: ansible_fedora_docker_purge
+
+- name: "Ensure fedora GPG key is present on machine"
+  copy:
+    src: "{{ role_path }}/files/fedora_gpg.key"
+    dest: "/tmp/fedora_gpg.key"
+
+- name: "Ensure fedora GPG key is trusted"
+  rpm_key:
+    key: /tmp/fedora_gpg.key
+    state: present
+
+- name: "Ensure docker-ce repositories are added"
+  yum_repository:
+    name: "{{ item.name }}"
+    file: "{{ item.filename }}"
+    baseurl: "{{ item.baseurl }}"
+    enabled: "{{ item.enabled }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey: "{{ item.gpgkey }}"
+  with_items: "{{ ansible_fedora_docker_yum_repos }}"
+
+- name: "Ensure docker-ce is installed"
+  dnf:
+    name: "docker-ce"
+    state: present
+
+- name: "Ensure dockerd is enabled and running"
+  systemd:
+    name: docker
+    daemon_reload: true
+    state: started
+    enabled: true

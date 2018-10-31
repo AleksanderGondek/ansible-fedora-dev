@@ -1,1 +1,31 @@
 ---
+ansible_fedora_docker_purge: false
+
+ansible_fedora_docker_yum_repos:
+  - name: "Docker CE Stable - $basearch"
+    filename: docker-ce-stable
+    baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/stable"
+    enabled: 1
+    gpgcheck: 1
+    gpgkey: "https://download.docker.com/linux/fedora/gpg"
+
+  - name: "Docker CE Edge - $basearch"
+    filename: docker-ce-edge
+    baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/edge"
+    enabled: 0
+    gpgcheck: 1
+    gpgkey: "https://download.docker.com/linux/fedora/gpg"
+
+  - name: "Docker CE Test - $basearch"
+    filename: docker-ce-test
+    baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/test"
+    enabled: 0
+    gpgcheck: 1
+    gpgkey: "https://download.docker.com/linux/fedora/gpg"
+
+  - name: "Docker CE Nightly - $basearch"
+    filename: docker-ce-nightly
+    baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/nightly"
+    enabled: 1
+    gpgcheck: 1
+    gpgkey: "https://download.docker.com/linux/fedora/gpg"
