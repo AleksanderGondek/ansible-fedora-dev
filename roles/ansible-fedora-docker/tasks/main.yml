@@ -39,6 +39,7 @@
 - name: "Ensure docker-ce repositories are added"
   yum_repository:
     name: "{{ item.name }}"
+    description: "{{ item.name }}"
     file: "{{ item.filename }}"
     baseurl: "{{ item.baseurl }}"
     enabled: "{{ item.enabled }}"

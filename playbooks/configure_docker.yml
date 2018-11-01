@@ -1,0 +1,8 @@
+---
+- name: "Ensure docker ce is installed and configured"
+  hosts: all
+  tasks:
+    - name: "Install docker ce"
+      become: true
+      import_role:
+        name: ansible-fedora-docker
