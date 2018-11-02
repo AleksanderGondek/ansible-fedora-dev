@@ -45,7 +45,7 @@
     enabled: "{{ item.enabled }}"
     gpgcheck: "{{ item.gpgcheck }}"
     gpgkey: "{{ item.gpgkey }}"
-  with_items: "{{ ansible_fedora_docker_yum_repos }}"
+  with_items: "{{ ansible_fedora_docker_default_yum_repos + ansible_fedora_docker_yum_repos }}"
 
 - name: "Ensure docker-ce is installed"
   dnf:

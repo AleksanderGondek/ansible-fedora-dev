@@ -1,7 +1,8 @@
 ---
 ansible_fedora_docker_purge: true
 
-ansible_fedora_docker_yum_repos:
+ansible_fedora_docker_yum_repos: []
+ansible_fedora_docker_default_yum_repos:
   - name: "docker-ce-stable"
     filename: docker-ce-stable
     baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/stable"
