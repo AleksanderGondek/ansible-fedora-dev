@@ -52,6 +52,16 @@
     name: "docker-ce"
     state: present
 
+- name: "Ensure /etc/docker/ directory exists"
+  file:
+    path: /etc/docker
+    state: present
+
+- name: "Configure docker daemon"
+  template:
+    src: "{{ role_path }}/templates/daemon.json.j2"
+    dest: /etc/docker/daemon.json
+
 - name: "Ensure dockerd is enabled and running"
   systemd:
     name: docker
