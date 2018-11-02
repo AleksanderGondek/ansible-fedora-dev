@@ -62,6 +62,20 @@
     src: "{{ role_path }}/templates/daemon.json.j2"
     dest: /etc/docker/daemon.json
 
+- name: Ensure group "docker" exists
+  group:
+    name: docker
+    gid: "{{ ansible_fedora_docker_gid | default(1001) }}"
+    state: present
+
+- name: Add user(s) to "docker" group
+  user:
+    name: "{{ item }}"
+    groups: "docker"
+    append: true
+  loop: "{{ ansible_fedora_docker_users }}"
+  when: "{{ ansible_fedora_docker_users }}"
+
 - name: "Ensure dockerd is enabled and running"
   systemd:
     name: docker

@@ -38,3 +38,6 @@ ansible_fedora_docker_log_opts:
     "max-file": "1"
     "labels": '{{.ImageName}}/{{.Name}}/{{.FullID}}'
 ansible_fedora_docker_storage_driver: "overlay2"
+
+ansible_fedora_docker_gid: 1001
+ansible_fedora_docker_users: []
