@@ -22,8 +22,11 @@
 
 - name: "Remove default docker data root"
   file:
-    path: "/var/lib/docker/"
+    path: "{{ item }}"
     state: absent
+  loop:
+    - "/var/lib/docker/"
+    - "{{ ansible_fedora_docker_data_root }}"
   when: ansible_fedora_docker_purge
 
 - name: "Ensure fedora GPG key is present on machine"
@@ -82,3 +85,11 @@
     daemon_reload: true
     state: started
     enabled: true
+
+- name: "Ensure docker compose is installed"
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ ansible_fedora_docker_compose_version }}/docker-compose-Linux-x86_64
+    checksum: "{{ ansible_fedora_docker_compose_checksum }}"
+    dest: "{{ ansible_fedora_docker_compose_install_path }}"
+    force: true
+    mode: 0755
