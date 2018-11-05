@@ -93,3 +93,8 @@
     dest: "{{ ansible_fedora_docker_compose_install_path }}"
     force: true
     mode: 0755
+
+- name: "Ensure cron is installed"
+  dnf:
+    name: cronie
+  state: present
