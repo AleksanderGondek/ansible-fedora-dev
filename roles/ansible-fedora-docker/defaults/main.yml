@@ -46,3 +46,11 @@ ansible_fedora_docker_compose_install: true
 ansible_fedora_docker_compose_version: "1.23.1"
 ansible_fedora_docker_compose_checksum: "sha256:c176543737b8aea762022245f0f4d58781d3cb1b072bc14f3f8e5bb96f90f1a2"
 ansible_fedora_docker_compose_install_path: "/usr/local/bin/docker-compose"
+
+ansible_fedora_docker_cron_jobs: []
+ansible_fedora_docker_default_cron_jobs:
+  - name: "Docker system prune - once a day"
+    file_name: "docker_system_prune"
+    job: 'docker system prune -af &> /dev/null'
+    schedule: ["0", "0", "*", "*", "*"]
+    user: "{{ (ansible_fedora_docker_users | first) | default('root') }}"

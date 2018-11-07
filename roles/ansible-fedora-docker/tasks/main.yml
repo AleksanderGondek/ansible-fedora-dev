@@ -98,3 +98,16 @@
   dnf:
     name: cronie
   state: present
+
+- name: "Ensure docker related jobs are defined"
+  cron:
+    name: "{{ item.name }}"
+    job: "{{ item.job }}"
+    minute: "{{ item.schedule[0] }}"
+    hour: "{{ item.schedule[1] }}"
+    day: "{{ item.schedule[2] }}"
+    month: "{{ item.schedule[3] }}"
+    weekday: "{{ item.schedule[4] }}"
+    cron_file: "{{ item.file_name }}"
+    user: "{{ item.user }}"
+  loop: "{{ ansible_fedora_docker_default_cron_jobs + ansible_fedora_docker_cron_jobs }}"
