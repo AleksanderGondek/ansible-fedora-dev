@@ -6,29 +6,29 @@ ansible_fedora_docker_default_yum_repos:
   - name: "docker-ce-stable"
     filename: docker-ce-stable
     baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/stable"
-    enabled: 1
-    gpgcheck: 1
+    enabled: true
+    gpgcheck: false
     gpgkey: "https://download.docker.com/linux/fedora/gpg"
 
   - name: "docker-ce-edge"
     filename: docker-ce-edge
     baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/edge"
-    enabled: 0
-    gpgcheck: 1
+    enabled: false
+    gpgcheck: true
     gpgkey: "https://download.docker.com/linux/fedora/gpg"
 
   - name: "docker-ce-test"
     filename: docker-ce-test
     baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/test"
-    enabled: 0
-    gpgcheck: 1
+    enabled: false
+    gpgcheck: true
     gpgkey: "https://download.docker.com/linux/fedora/gpg"
 
   - name: "docker-ce-nightly"
     filename: docker-ce-nightly
     baseurl: "https://download.docker.com/linux/fedora/$releasever/$basearch/nightly"
-    enabled: 0
-    gpgcheck: 1
+    enabled: false
+    gpgcheck: true
     gpgkey: "https://download.docker.com/linux/fedora/gpg"
 
 ansible_fedora_docker_data_root: "/var/lib/docker"

@@ -1,0 +1,26 @@
+---
+- name: "Prepare k8s-related tooling"
+  hosts: all
+  tasks:
+    - name: "Ensure jq is installed"
+      become: true
+      dnf:
+        name: jq
+        state: present
+
+    - name: "Ensure kubernetes repository is added"
+      become: true
+      yum_repository:
+        name: "kubernetes"
+        description: "kubernetes"
+        file: "kubernetes"
+        baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
+        enabled: true
+        gpgcheck: true
+        gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
+
+    - name: "Ensure kubectl is installed"
+      become: true
+      dnf:
+        name: kubectl
+        state: present
