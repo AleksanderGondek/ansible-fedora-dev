@@ -29,3 +29,5 @@ oh_my_zsh_configuration:
     - tmux
     - vagrant
     - yarn
+
+docker_users: ["{{ ansible_user_id }}"]

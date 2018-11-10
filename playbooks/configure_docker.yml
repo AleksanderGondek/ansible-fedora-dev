@@ -6,3 +6,5 @@
       become: true
       import_role:
         name: ansible-fedora-docker
+      vars:
+        ansible_fedora_docker_users: "{{ docker_users }}"
