@@ -1,0 +1,13 @@
+---
+- name: "Ensure rust lang is installed"
+  hosts: all
+  tasks:
+    - name: "Download rustup installation script"
+      get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/rustup.rs
+
+    - name: "Run rustup installation"
+      script: /tmp/rustup.rs -y
+      args:
+        executable: sh
