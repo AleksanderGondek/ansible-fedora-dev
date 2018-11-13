@@ -1,6 +1,9 @@
 # Ansible
 ansible.log
 
+# Ansible galaxy imported roles
+imported-roles/
+
 # Pycharm
 .idea
 
