@@ -1,0 +1,15 @@
+---
+- name: "Install and configure Visual Studio Code"
+  hosts: all
+  tasks:
+    - name: ""
+      import_role:
+        name: "gantsign.visual-studio-code"
+      vars:
+        users:
+          - username: "{{ ansible_user_id }}"
+            visual_studio_code_extensions:
+              - peterjausovec.vscode-docker
+              - yzhang.markdown-all-in-one
+              - robertohuertasm.vscode-icons
+              - rust-lang.rust
