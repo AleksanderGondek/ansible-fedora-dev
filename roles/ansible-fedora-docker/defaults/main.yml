@@ -34,9 +34,8 @@ ansible_fedora_docker_default_yum_repos:
 ansible_fedora_docker_data_root: "/var/lib/docker"
 ansible_fedora_docker_log_driver: "json-file"
 ansible_fedora_docker_log_opts:
-    "max-size": "1g"
-    "max-file": "1"
-    "labels": '{{.ImageName}}/{{.Name}}/{{.FullID}}'
+    "max-size": '1g'
+    "max-file": '1'
 ansible_fedora_docker_storage_driver: "overlay2"
 
 ansible_fedora_docker_gid: 1001
@@ -45,7 +44,7 @@ ansible_fedora_docker_users: []
 ansible_fedora_docker_compose_install: true
 ansible_fedora_docker_compose_version: "1.23.1"
 ansible_fedora_docker_compose_checksum: "sha256:c176543737b8aea762022245f0f4d58781d3cb1b072bc14f3f8e5bb96f90f1a2"
-ansible_fedora_docker_compose_install_path: "/usr/local/bin/docker-compose"
+ansible_fedora_docker_compose_install_path: "/usr/bin/docker-compose"
 
 ansible_fedora_docker_cron_jobs: []
 ansible_fedora_docker_default_cron_jobs:

@@ -58,7 +58,7 @@
 - name: "Ensure /etc/docker/ directory exists"
   file:
     path: /etc/docker
-    state: present
+    state: directory
 
 - name: "Configure docker daemon"
   template:
@@ -77,7 +77,7 @@
     groups: "docker"
     append: true
   loop: "{{ ansible_fedora_docker_users }}"
-  when: "{{ ansible_fedora_docker_users }}"
+  when: ansible_fedora_docker_users is defined
 
 - name: "Ensure dockerd is enabled and running"
   systemd:
@@ -97,7 +97,7 @@
 - name: "Ensure cron is installed"
   dnf:
     name: cronie
-  state: present
+    state: present
 
 - name: "Ensure docker related jobs are defined"
   cron:

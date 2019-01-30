@@ -1,12 +1,6 @@
 {
   "data-root": "{{ ansible_fedora_docker_data_root }}",
   "log-driver": "{{ ansible_fedora_docker_log_driver }}",
-  "log-opts": {
-{% if ansible_fedora_docker_log_opts %}
-{% for key, value in ansible_fedora_docker_log_opts.items() %}
-  "{{ key }}": "{{ value}}"{{ "," if not loop.last }}
-{% endfor %}
-{% endif %}
-  },
+  "log-opts": {{ ansible_fedora_docker_log_opts | to_nice_json }},
   "storage-driver": "{{ ansible_fedora_docker_storage_driver }}"
 }
