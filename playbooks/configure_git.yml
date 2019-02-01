@@ -2,16 +2,13 @@
 - name: "Prepare a working git environment"
   hosts: all
   tasks:
-    - name: "Ensure git is installed"
+    - name: "Ensure git, gitk and git-crypt are installed"
       become: true
       dnf:
-        name: git
-        state: present
-
-    - name: "Ensure gitk is installed"
-      become: true
-      dnf:
-        name: gitk
+        name: 
+          - git
+          - gitk
+          - git-crypt
         state: present
 
     - name: "Configure git with appropriate information"
